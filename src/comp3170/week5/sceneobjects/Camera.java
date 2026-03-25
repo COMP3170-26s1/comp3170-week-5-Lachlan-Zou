@@ -3,15 +3,22 @@ package comp3170.week5.sceneobjects;
 import static org.lwjgl.glfw.GLFW.*;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import comp3170.SceneObject;
 import comp3170.InputManager;
 
 public class Camera extends SceneObject {
+	
+	private Vector3f position;
+	private Vector3f scale;
+	
 
 	private float zoom = 20.0f; // You'll need this when setting up your projection matrix...
 	private Matrix4f projectionMatrix = new Matrix4f();
 	private Matrix4f viewMatrix = new Matrix4f();
+	private int width;
+	private int height;
 	
 	public Camera() {
 		
@@ -19,6 +26,10 @@ public class Camera extends SceneObject {
 	
 	public void resize(int w, int h) {
 		//TODO: Change the projection matrix when the window is resized. (TASK 2)
+		width = w;
+		height = h;
+		float aspect = (float) w/h;
+		projectionMatrix.scaling(zoom * aspect, zoom );
 	}
 	
 	public Matrix4f GetViewMatrix(Matrix4f dest) {

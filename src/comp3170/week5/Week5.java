@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL41.*;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2i;
+import org.joml.Vector4f;
 
 import comp3170.OpenGLException;
 import comp3170.IWindowListener;
@@ -27,6 +28,7 @@ public class Week5 implements IWindowListener {
 	private long oldTime;
 	
 	private Scene scene;
+	private Camera sceneCamera;
 
 	public Week5()  throws OpenGLException {		
 		
@@ -54,6 +56,9 @@ public class Week5 implements IWindowListener {
 			input.getCursorPos(position); // This will get the mouse position in screen space.
 
 			// TODO: Add a new flower at the mouse position. (TASK 3)
+			
+			Vector4f worldPos = new Vector4f(position.x, position.y, 1, 1);
+			scene.createFlower(worldPos);
 		}
 		
 		input.clear(); // Run this to clear input before the next frame.
@@ -65,6 +70,14 @@ public class Week5 implements IWindowListener {
 	private Matrix4f mvpMatrix = new Matrix4f();
 	
 	public void draw() {
+		sceneCamera = scene.sceneCam();
+		sceneCamera.GetViewMatrix(viewMatrix);
+		sceneCamera.GetProjectionMatrix(projectionMatrix);
+		
+		projectionMatrix.mul(viewMatrix, mvpMatrix);
+		
+		//mvpMatrix.mul(viewMatrix).mul(projectionMatrix);
+		
 		update();
 	
 		glClearColor(87.0f/255.0f, 60.0f/255.0f, 23.0f/255.0f, 1.0f); // Dirt brown

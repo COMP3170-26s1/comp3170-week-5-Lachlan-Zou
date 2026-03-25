@@ -19,7 +19,8 @@ public class Flower extends SceneObject {
 	
 	private final float HEIGHT = 1.0f;
 	private final float WIDTH = 0.1f;
-	private Vector3f colour = new Vector3f(0f, 0.5f, 0f); // Dark Green
+	private Vector3f stemColour = new Vector3f(0f, 0.5f, 0f); // Dark Green
+	private Vector3f petalColour = new Vector3f(0.976f, 0.729f, 0.067f);
 
 	private Vector4f[] vertices;
 	private int vertexBuffer;
@@ -59,13 +60,18 @@ public class Flower extends SceneObject {
 		};
 		    
 		indexBuffer = GLBuffers.createIndexBuffer(indices);
+		
+		FlowerHead head = new FlowerHead(nPetals,  petalColour);
+		head.setParent(this);
+		head.getMatrix().translate(0,HEIGHT,0);
+		head.getMatrix().scale(0.5f);
 	}
 	
 	public void drawSelf(Matrix4f mvpMatrix) {
 		shader.enable();
 		shader.setUniform("u_mvpMatrix", mvpMatrix);
 	    shader.setAttribute("a_position", vertexBuffer);
-	    shader.setUniform("u_colour", colour);	    
+	    shader.setUniform("u_colour", stemColour);	    
 	    
 	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 	    glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);		
