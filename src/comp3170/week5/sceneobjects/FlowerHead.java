@@ -41,7 +41,7 @@ public class FlowerHead extends SceneObject {
 		Matrix4f rotate = new Matrix4f();
 		
 		for (int i = 0; i < vertices.length-1; i++) {
-			float angle = i * TAU / nPetals *2;
+			float angle = (i * TAU / nPetals *2) + TAU/4;
 
 			rotate.rotationZ(angle); // R = R(angle)
 			if ((i+1)%2==0) {
