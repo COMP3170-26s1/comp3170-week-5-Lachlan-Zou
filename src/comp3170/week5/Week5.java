@@ -28,7 +28,7 @@ public class Week5 implements IWindowListener {
 	private long oldTime;
 	
 	private Scene scene;
-	private Camera sceneCamera;
+	//private Camera sceneCamera;
 
 	public Week5()  throws OpenGLException {		
 		
@@ -70,9 +70,9 @@ public class Week5 implements IWindowListener {
 	private Matrix4f mvpMatrix = new Matrix4f();
 	
 	public void draw() {
-		sceneCamera = scene.sceneCam();
-		sceneCamera.GetViewMatrix(viewMatrix);
-		sceneCamera.GetProjectionMatrix(projectionMatrix);
+//		sceneCamera = scene.sceneCam();
+//		sceneCamera.GetViewMatrix(viewMatrix);
+//		sceneCamera.GetProjectionMatrix(projectionMatrix);
 		
 		projectionMatrix.mul(viewMatrix, mvpMatrix);
 		

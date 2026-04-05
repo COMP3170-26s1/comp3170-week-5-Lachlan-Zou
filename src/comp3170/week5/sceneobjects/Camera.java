@@ -29,7 +29,7 @@ public class Camera extends SceneObject {
 		width = w;
 		height = h;
 		float aspect = (float) w/h;
-		projectionMatrix.scaling(zoom * aspect, zoom );
+//		projectionMatrix.scaling(zoom * aspect, zoom );
 	}
 	
 	public Matrix4f GetViewMatrix(Matrix4f dest) {

@@ -41,15 +41,16 @@ public class FlowerHead extends SceneObject {
 		Matrix4f rotate = new Matrix4f();
 		
 		for (int i = 0; i < vertices.length-1; i++) {
-			float angle = i * TAU / nPetals;
+			float angle = i * TAU / nPetals *2;
 
 			rotate.rotationZ(angle); // R = R(angle)
 			if ((i+1)%2==0) {
-				vertices[i+1] = new Vector4f(0.75f, 0, 0, 1);
+				vertices[i+1] = new Vector4f(1f, 0, 0, 1);
 			}
 			else {
 				vertices[i+1] = new Vector4f(1, 0, 0, 1); // v = (1,0,0)
 			}
+			System.out.println(rotate);
 			vertices[i+1].mul(rotate); // v = R v
 		}
 		// Consider the best way to draw the mesh with the nPetals input. 
